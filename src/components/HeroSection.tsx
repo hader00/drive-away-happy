@@ -44,19 +44,19 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="#inventory"
+            <button
+              onClick={() => document.getElementById("inventory")?.scrollIntoView({ behavior: "smooth" })}
               className="group inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-sm text-sm font-semibold uppercase tracking-wider hover:bg-gold-glow transition-all duration-300 glow-gold"
             >
               View Inventory
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#contact"
+            </button>
+            <button
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="inline-flex items-center justify-center gap-3 border border-border text-foreground px-8 py-4 rounded-sm text-sm font-semibold uppercase tracking-wider hover:border-primary hover:text-primary transition-all duration-300"
             >
               Book a Test Drive
-            </a>
+            </button>
           </div>
         </motion.div>
 

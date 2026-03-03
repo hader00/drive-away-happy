@@ -103,12 +103,12 @@ const FeaturedVehicles = () => {
         </div>
 
         <div className="text-center mt-12">
-          <a
-            href="#inventory"
+          <button
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             className="inline-flex items-center gap-2 border border-border text-foreground px-8 py-3 rounded-sm text-sm font-semibold uppercase tracking-wider hover:border-primary hover:text-primary transition-all duration-300"
           >
-            View All Vehicles
-          </a>
+            Inquire About a Vehicle
+          </button>
         </div>
       </div>
     </section>

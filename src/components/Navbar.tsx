@@ -5,7 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = ["Inventory", "About", "Services", "Contact"];
+  const links = ["Inventory", "About", "Contact"];
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-surface">
@@ -17,13 +25,13 @@ const Navbar = () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <a
+            <button
               key={link}
-              href={`#${link.toLowerCase()}`}
+              onClick={() => scrollTo(link.toLowerCase())}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
             >
               {link}
-            </a>
+            </button>
           ))}
           <a
             href="tel:+15551234567"
@@ -54,14 +62,13 @@ const Navbar = () => {
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {links.map((link) => (
-                <a
+                <button
                   key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => scrollTo(link.toLowerCase())}
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors uppercase tracking-wide"
                 >
                   {link}
-                </a>
+                </button>
               ))}
               <a
                 href="tel:+15551234567"
