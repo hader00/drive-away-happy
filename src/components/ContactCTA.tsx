@@ -1,7 +1,27 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactCTA = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.firstName || !formData.email) {
+      toast({ title: "Please fill in required fields", description: "First name and email are required.", variant: "destructive" });
+      return;
+    }
+    setSending(true);
+    setTimeout(() => {
+      toast({ title: "Inquiry Sent!", description: "We'll get back to you within 24 hours." });
+      setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      setSending(false);
+    }, 1000);
+  };
+
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-6">
@@ -46,42 +66,53 @@ const ContactCTA = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <form className="bg-card border border-border rounded-lg p-8 space-y-5">
+            <form onSubmit={handleSubmit} className="bg-card border border-border rounded-lg p-8 space-y-5">
               <h3 className="text-xl font-display font-semibold mb-2 text-foreground">
                 Schedule a Visit
               </h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  placeholder="First Name"
+                  placeholder="First Name *"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                   className="bg-secondary border border-border rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                 />
                 <input
                   type="text"
                   placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   className="bg-secondary border border-border rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder="Email Address *"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full bg-secondary border border-border rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 className="w-full bg-secondary border border-border rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <textarea
                 rows={4}
                 placeholder="Tell us what you're looking for..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="w-full bg-secondary border border-border rounded-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
               />
               <button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground py-4 rounded-sm text-sm font-semibold uppercase tracking-wider hover:bg-gold-glow transition-colors duration-300"
+                disabled={sending}
+                className="w-full bg-primary text-primary-foreground py-4 rounded-sm text-sm font-semibold uppercase tracking-wider hover:bg-gold-glow transition-colors duration-300 disabled:opacity-50"
               >
-                Send Inquiry
+                {sending ? "Sending..." : "Send Inquiry"}
               </button>
             </form>
           </motion.div>
