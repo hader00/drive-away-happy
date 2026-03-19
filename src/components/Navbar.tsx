@@ -75,11 +75,11 @@ const Navbar = () => {
             <div className="px-6 py-4 flex flex-col gap-4">
               {links.map((link) => (
                 <button
-                  key={link}
-                  onClick={() => scrollTo(link.toLowerCase())}
+                  key={link.label}
+                  onClick={link.action}
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors uppercase tracking-wide"
                 >
-                  {link}
+                  {link.label}
                 </button>
               ))}
               <a
