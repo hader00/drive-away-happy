@@ -38,11 +38,11 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <button
-              key={link}
-              onClick={() => scrollTo(link.toLowerCase())}
+              key={link.label}
+              onClick={link.action}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
             >
-              {link}
+              {link.label}
             </button>
           ))}
           <a
