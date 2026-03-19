@@ -1,17 +1,29 @@
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const links = ["Inventory", "About", "Contact"];
+  const links = [
+    { label: "Inventory", action: () => navigateTo("/#inventory") },
+    { label: "About", action: () => navigate("/about") },
+    { label: "Contact", action: () => navigate("/contact") },
+  ];
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+  const navigateTo = (target: string) => {
+    setIsOpen(false);
+    if (target.startsWith("/#")) {
+      const id = target.slice(2);
+      if (location.pathname === "/") {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate("/");
+        setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 300);
+      }
     }
   };
 
