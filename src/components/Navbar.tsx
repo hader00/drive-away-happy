@@ -1,17 +1,29 @@
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const links = ["Inventory", "About", "Contact"];
+  const links = [
+    { label: "Inventory", action: () => navigateTo("/#inventory") },
+    { label: "About", action: () => navigate("/about") },
+    { label: "Contact", action: () => navigate("/contact") },
+  ];
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+  const navigateTo = (target: string) => {
+    setIsOpen(false);
+    if (target.startsWith("/#")) {
+      const id = target.slice(2);
+      if (location.pathname === "/") {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate("/");
+        setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 300);
+      }
     }
   };
 
@@ -26,11 +38,11 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <button
-              key={link}
-              onClick={() => scrollTo(link.toLowerCase())}
+              key={link.label}
+              onClick={link.action}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
             >
-              {link}
+              {link.label}
             </button>
           ))}
           <a
@@ -63,11 +75,11 @@ const Navbar = () => {
             <div className="px-6 py-4 flex flex-col gap-4">
               {links.map((link) => (
                 <button
-                  key={link}
-                  onClick={() => scrollTo(link.toLowerCase())}
+                  key={link.label}
+                  onClick={link.action}
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors uppercase tracking-wide"
                 >
-                  {link}
+                  {link.label}
                 </button>
               ))}
               <a
