@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
@@ -81,6 +82,7 @@ const About = () => {
       </div>
 
       <WhyChooseUs />
+      <Testimonials />
       <Footer />
     </div>
   );

@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import ContactCTA from "@/components/ContactCTA";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
@@ -24,6 +25,7 @@ const Contact = () => {
         </div>
       </div>
       <ContactCTA />
+      <FAQ />
       <Footer />
     </div>
   );
