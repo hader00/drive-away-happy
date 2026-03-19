@@ -1,8 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import FeaturedVehicles from "@/components/FeaturedVehicles";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -11,8 +9,6 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <FeaturedVehicles />
-      <WhyChooseUs />
-      <ContactCTA />
       <Footer />
     </div>
   );
