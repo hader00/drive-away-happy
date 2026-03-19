@@ -82,6 +82,7 @@ const About = () => {
       </div>
 
       <WhyChooseUs />
+      <Testimonials />
       <Footer />
     </div>
   );

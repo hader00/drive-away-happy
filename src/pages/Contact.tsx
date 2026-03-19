@@ -25,6 +25,7 @@ const Contact = () => {
         </div>
       </div>
       <ContactCTA />
+      <FAQ />
       <Footer />
     </div>
   );
